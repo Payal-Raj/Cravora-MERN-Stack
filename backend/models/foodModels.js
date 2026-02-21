@@ -1,6 +1,8 @@
 import mongoose, { mongo } from "mongoose";
 import { type } from "os";
 
+//model is a blueprint of db
+
 const foodSchema = new mongoose.Schema({
     name: {type:String, required:true},
     description: {type:String, required: true},
