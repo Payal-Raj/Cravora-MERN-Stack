@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Add.css';
 import { assets } from '../../assets/assets';
 
 const Add = () => {
 
   const [image, setImage] = useState(null);
+  const{data, setData} = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "Select"
+  })
+
+  const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData(data => ({...data, [name] : value}))
+  }
+
+  
 
   return (
     <div className='add'>
@@ -30,18 +44,18 @@ const Add = () => {
         <div className="form-right">
           <div className="add-product-name flex-col">
             <p className="section-title">Product Name</p>
-            <input type="text" name='name' placeholder='Type Here' />
+            <input onChange={onChangeHandler} value={data.name} type="text" name='name' placeholder='Type Here' />
           </div>
 
           <div className="add-product-description flex-col">
             <p className="section-title">Product Description</p>
-            <textarea name="description" rows="5" placeholder='Write Description' required></textarea>
+            <textarea onChange={onChangeHandler} value={data.description} name="description" rows="5" placeholder='Write Description' required></textarea>
           </div>
 
           <div className="add-category-price">
             <div className="add-category flex-col">
               <p className="section-title">Category</p>
-              <select name="category">
+              <select onChange={onChangeHandler} name="category">
                 <option value="Salad">Salad</option>
                 <option value="Burger">Burger</option>
                 <option value="Sandwich">Sandwich</option>
@@ -54,7 +68,7 @@ const Add = () => {
             </div>
             <div className="add-price flex-col">
               <p className="section-title">Price</p>
-              <input type="number" name='price' placeholder='500' />
+              <input onChange={onChangeHandler} value={data.price} type="number" name='price' placeholder='500' />
             </div>
           </div>
 
