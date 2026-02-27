@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Add.css';
 import { assets } from '../../assets/assets';
 
 const Add = () => {
+
+  const [image, setImage] = useState(null);
+
   return (
     <div className='add'>
       <form className="add-form">
         <div className="form-left">
           <p className="section-title">Upload Image</p>
           <label htmlFor="image" className="upload-label">
-            <img src={assets.upload_area} alt="Upload" className="upload-img"/>
+            <img 
+              src={image ? URL.createObjectURL(image) : assets.upload_area} 
+              alt="Upload" 
+              className="upload-img"
+            />
           </label>
-          <input type="file" id='image' hidden required/>
+          <input 
+            onChange={(e) => setImage(e.target.files[0])} 
+            type="file" 
+            id='image' 
+            hidden 
+            required
+          />
         </div>
+
         <div className="form-right">
           <div className="add-product-name flex-col">
             <p className="section-title">Product Name</p>
