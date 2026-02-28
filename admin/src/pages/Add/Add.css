@@ -150,6 +150,7 @@
 @media (max-width: 600px) {
   .add-form {
     padding: 20px;
+    margin-bottom: 25px;
   }
 
   .form-left {
@@ -185,6 +186,7 @@
 @media (max-width: 400px) {
   .add-form {
     padding: 15px;
+    margin-bottom: 30px;
   }
   .add-category-price select,
   .add-category-price input {

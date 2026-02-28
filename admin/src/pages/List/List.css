@@ -1,0 +1,176 @@
+.list{
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+}
+
+/* Card container */
+.list.add{
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    border: 1px solid #f1f1f1;
+}
+
+/* Title */
+.list p{
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+/* Table container */
+.list-table{
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Table row base */
+.list-table-format{
+    display: grid;
+    grid-template-columns: 80px 1.5fr 1fr 1fr 80px;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.25s ease;
+}
+
+/* Header row */
+.list-table-format.title{
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+}
+
+.list-table-format.title b{
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Data rows */
+.list-table-format:not(.title){
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+}
+
+/* Hover effect */
+.list-table-format:not(.title):hover{
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Image */
+.list-table-format img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Text */
+.list-table-format p{
+    font-size: 14px;
+    color: #374151;
+    margin: 0;
+}
+
+/* Price */
+.list-table-format p:nth-child(4){
+    font-weight: 600;
+    color: #059669;
+}
+
+/* Delete button */
+.list-table-format p:last-child{
+    color: #ef4444;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.list-table-format p:last-child:hover{
+    color: #dc2626;
+    transform: scale(1.1);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 900px){
+
+    .list{
+        padding: 20px;
+    }
+
+    .list-table-format{
+        grid-template-columns: 60px 1.5fr 1fr 1fr 60px;
+        padding: 12px;
+    }
+
+    .list-table-format img{
+        width: 45px;
+        height: 45px;
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 600px){
+
+    .list.add{
+        padding: 18px;  
+        margin-bottom: 80px;
+    }
+
+    .list p{
+        font-size: 18px;
+    }
+
+    .list-table-format{
+        grid-template-columns: 50px 1fr 1fr;
+        grid-template-areas:
+            "img name action"
+            "img category price";
+        row-gap: 6px;
+        padding: 12px;
+    }
+
+    .list-table-format img{
+        grid-area: img;
+        width: 45px;
+        height: 45px;
+    }
+
+    .list-table-format p:nth-child(2){
+        grid-area: name;
+        font-weight: 600;
+    }
+
+    .list-table-format p:nth-child(3){
+        grid-area: category;
+        font-size: 13px;
+        color: #6b7280;
+    }
+
+    .list-table-format p:nth-child(4){
+        grid-area: price;
+        font-size: 14px;
+    }
+
+    .list-table-format p:last-child{
+        grid-area: action;
+        text-align: right;
+    }
+
+    .list-table-format.title{
+        display: none;
+    }
+
+}
