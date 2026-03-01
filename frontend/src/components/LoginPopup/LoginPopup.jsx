@@ -10,6 +10,19 @@ const LoginPopup = ({ setShowLogin }) => {
   }, []);
 
   const [currState, setCurrState] = useState("Sign Up");
+
+  const [data, setData] = useState({
+    name:"",
+    email:"",
+    password:""
+  })
+
+  const onChangleHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData(data=>({...data, [name]:value}));
+  }
+
   return (
     <div className="login-popup" data-aos="fade-in" data-aos-duration="200">
       <div
@@ -30,10 +43,10 @@ const LoginPopup = ({ setShowLogin }) => {
           {currState === "Login" ? (
             <></>
           ) : (
-            <input type="text" placeholder="Name" required />
+            <input name="name" onChange={onChangleHandler} value={data.name} type="text" placeholder="Name" required />
           )}
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input name="email" onChange={onChangleHandler} value={data.email} type="email" placeholder="Email" required />
+          <input name="password" onChange={onChangleHandler} value={data.password} type="password" placeholder="Password" required />
         </div>
         <Button text={currState === "Sign Up" ? "Create Account" : "Login"} />
         <div className="login-popup-conditions">
