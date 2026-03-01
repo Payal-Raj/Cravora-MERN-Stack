@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 import Button from "../button/button";
 import AOS from "aos";
+import { StoreContext } from "../../Context/StoreContext";
+import axios from "axios";
 
 const LoginPopup = ({ setShowLogin }) => {
-  useEffect(() => {
-    AOS.refresh();
-  }, []);
-
+  const {url, setToken} = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign Up");
 
   const [data, setData] = useState({
@@ -23,9 +22,34 @@ const LoginPopup = ({ setShowLogin }) => {
     setData(data=>({...data, [name]:value}));
   }
 
+  const onLogin = async (event) => {
+    event.preventDefault();
+    let newURL = url;
+    if (currState === "Login") {
+      newURL += "/api/user/login";
+    }else{
+      newURL += "/api/user/register";
+    }
+
+    const response = await axios.post(newURL, data);
+
+    if (response.data.success) {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    }else{
+      alert(response.data.message);
+    }
+  }
+
+  useEffect(() => {
+    AOS.refresh();
+  }, []);
+
   return (
     <div className="login-popup" data-aos="fade-in" data-aos-duration="200">
-      <div
+      <form 
+      onSubmit={onLogin}
         className="login-popup-container"
         data-aos="zoom-in"
         data-aos-duration="400"
@@ -48,7 +72,7 @@ const LoginPopup = ({ setShowLogin }) => {
           <input name="email" onChange={onChangleHandler} value={data.email} type="email" placeholder="Email" required />
           <input name="password" onChange={onChangleHandler} value={data.password} type="password" placeholder="Password" required />
         </div>
-        <Button text={currState === "Sign Up" ? "Create Account" : "Login"} />
+        <Button text={currState === "Sign Up" ? "Create Account" : "Login"} type="submit"/>
         <div className="login-popup-conditions">
           <input type="checkbox" required />
           <div className="conditions-text">
@@ -80,7 +104,7 @@ const LoginPopup = ({ setShowLogin }) => {
             </span>
           </p>
         )}
-      </div>
+      </form>
     </div>
   );
 };
