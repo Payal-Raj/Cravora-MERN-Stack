@@ -28,6 +28,18 @@ const registerUser = async (req, res) =>  {
             return res.json({success:false, message: "Please enter a strong password."})
             
          }
+
+         //hashing user password
+         const salt = await bcrypt.genSalt(10)
+         const hashedPassword = await bcrypt.hash(password, salt);
+
+         const newUser = new userModel({
+            name: name,
+            email: email,
+            password: hashedPassword
+         });
+
+         const user = await newUser.save();
     } catch (error) {
         
     }
