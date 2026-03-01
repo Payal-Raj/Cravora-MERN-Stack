@@ -9,7 +9,7 @@ const loginUser = async(req, res) => {
 }
 
 const createToken = (id) => {
-    return jwt.sign({id},process.env.JWT_SECRET)
+    return JWT.sign({id},process.env.JWT_SECRET)
 }
 
 // register new user
