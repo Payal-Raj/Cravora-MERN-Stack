@@ -89,6 +89,77 @@
   font-size: 36px;
 }
 
+.navbar-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-profile img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.navbar-profile img:hover {
+  transform: scale(1.05);
+}
+
+.nav-profile-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px 0;
+  min-width: 160px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid #eee;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+
+  z-index: 999;
+}
+.navbar-profile:hover .nav-profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #fff3e9;
+  color: #e87814;
+}
+
+.dropdown-icon {
+  font-size: 18px;
+  color: inherit;
+}
+.nav-profile-dropdown hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 4px 0;
+}
+
+.nav-profile-dropdown {
+  list-style: none;
+}
+
 /* Mobile styles */
 @media screen and (max-width: 768px) {
   .toggle-btn {
@@ -127,6 +198,64 @@
 
   .navbar-right {
     display: none;
+  }
+
+   /* Profile container full width */
+  .navbar-profile {
+    width: 100%;
+  }
+
+  /* Profile image and name row */
+  .navbar-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+  }
+
+  /* Make dropdown part of mobile menu flow */
+  .nav-profile-dropdown {
+    position: static;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin-top: 8px;
+
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* Each item full width */
+  .dropdown-item {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 17px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  /* icon size */
+  .dropdown-icon {
+    font-size: 20px;
+  }
+
+  /* better spacing with cart and profile */
+  .mobile-dropdown-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar-profile:hover .nav-profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   /* Mobile dropdown cart + button at the bottom of links */

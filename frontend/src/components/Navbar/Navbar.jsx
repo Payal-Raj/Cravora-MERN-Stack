@@ -4,15 +4,22 @@ import { assets } from "../../assets/assets";
 import Button from "../button/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { StoreContext } from "../../Context/StoreContext";
+import { FaBoxOpen, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
   const [open, setOpen] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const {getTotalCartAmount} = useContext(StoreContext)
+  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -68,7 +75,9 @@ const Navbar = ({ setShowLogin }) => {
       )}
 
       {/* Navbar links */}
-      <ul className={`navbar-menu ${isMobile ? "mobile" : ""} ${open ? "open" : ""}`}>
+      <ul
+        className={`navbar-menu ${isMobile ? "mobile" : ""} ${open ? "open" : ""}`}
+      >
         <li className={menu === "Home" ? "active" : ""}>
           <Link
             to="/"
@@ -108,15 +117,57 @@ const Navbar = ({ setShowLogin }) => {
               onClick={() => setOpen(false)}
             >
               <span className="material-symbols-outlined">shopping_cart</span>
-              <div className={getTotalCartAmount() === 0 ?  "" : "dot"}></div>
+              <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
             </Link>
-            <Button
-              text="Sign in"
-              onClick={() => {
-                setShowLogin(true);
-                setOpen(false);
-              }}
-            />
+            {!token ? (
+              <Button
+                text="Sign in"
+                onClick={() => {
+                  setShowLogin(true);
+                  setOpen(false);
+                }}
+              />
+            ) : (
+              <div className="navbar-profile">
+                <img
+                  src={assets.profile_icon}
+                  alt=""
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                />
+
+                {(showProfileMenu || !isMobile) && (
+                  <ul className="nav-profile-dropdown">
+                    {/* Orders */}
+                    <li
+                      className="dropdown-item"
+                      onClick={() => {
+                        navigate("/orders"); 
+                        setShowProfileMenu(false);
+                        setOpen(false);
+                      }}
+                    >
+                      <FaBoxOpen className="dropdown-icon" />
+                      <p>Orders</p>
+                    </li>
+
+                    <hr />
+
+                    {/* Logout */}
+                    <li
+                      className="dropdown-item"
+                      onClick={() => {
+                        logout();
+                        setShowProfileMenu(false);
+                        setOpen(false);
+                      }}
+                    >
+                      <FaSignOutAlt className="dropdown-icon" />
+                      <p>Logout</p>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
         )}
       </ul>
@@ -127,9 +178,34 @@ const Navbar = ({ setShowLogin }) => {
           <span className="material-symbols-outlined">search</span>
           <Link to="/cart" className="navbar-cart-link">
             <span className="material-symbols-outlined">shopping_cart</span>
-            <div className={getTotalCartAmount() === 0 ?  "" : "dot"}></div>
+            <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
           </Link>
-          <Button onClick={() => setShowLogin(true)} text="Sign in" />
+          {!token ? (
+            <Button
+              text="Sign in"
+              onClick={() => {
+                setShowLogin(true);
+                setOpen(false);
+              }}
+            />
+          ) : (
+            <div className="navbar-profile">
+              <img src={assets.profile_icon} alt="" />
+              <ul className="nav-profile-dropdown">
+                <li className="dropdown-item">
+                  <FaBoxOpen className="dropdown-icon" />
+                  <p>Orders</p>
+                </li>
+
+                <hr />
+
+                <li className="dropdown-item" onClick={logout}>
+                  <FaSignOutAlt className="dropdown-icon" />
+                  <p>Logout</p>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </nav>

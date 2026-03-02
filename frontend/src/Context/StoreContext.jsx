@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { food_list } from "../assets/assets";
 import { StoreContext } from "./StoreContext";
 
@@ -6,7 +6,7 @@ const StoreContextProvider = ({ children }) => {
 
     const[cartItems, setCartItems] = useState({});
 
-    const [token, setToken] = useState("")
+    const [token, setToken] = useState(() => localStorage.getItem("token") || "");
 
     const url = 'http://localhost:4000'
 

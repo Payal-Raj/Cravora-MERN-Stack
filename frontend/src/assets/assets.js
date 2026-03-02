@@ -14,6 +14,7 @@ import remove_icon_red from './remove_icon_red.png'
 import play_store from './play_store.png'
 import app_store from './app_store.png'
 import cross_icon from './cross_icon.png'
+import profile_icon from './profile_icon.png'
 
 // Salad
 import salad_1 from './salad_1.jpg'
@@ -121,7 +122,8 @@ export const assets = {
     remove_icon_red,
     play_store,
     app_store,
-    cross_icon
+    cross_icon,
+    profile_icon
 }
 
 
