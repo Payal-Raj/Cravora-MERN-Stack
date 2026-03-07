@@ -84,4 +84,35 @@ const userOrders = async (req,res) => {
   }
 }
 
-export { placeOrder,verifyOrder, userOrders};
+//listing orders for admin
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({}); 
+    res.json({success:true, data:orders});
+  } catch (error) {
+    console.log(error);
+    res.json({success:false, message: "Error"})
+  }
+}
+
+//api for update order status
+const updateStatus = async (req, res) => {
+  try {
+    const { orderid, status } = req.body;
+
+    const result = await orderModel.updateOne(
+      { _id: orderid },   // filter
+      { $set: { status } } // update
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    res.json({ success: true, message: "Status Updated" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Error updating status" });
+  }
+};
+export { placeOrder,verifyOrder, userOrders, listOrders, updateStatus};
