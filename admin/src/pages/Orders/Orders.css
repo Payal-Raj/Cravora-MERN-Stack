@@ -1,0 +1,132 @@
+/* General Styles */
+.order.add {
+  padding: 40px 8%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb;
+  min-height: 70vh;
+}
+
+.order.add h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #1e2a38;
+  text-align: center;
+}
+
+/* Orders List Container */
+.order-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+/* Single Order Card */
+.order-item {
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.order-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+/* Food Items */
+.order-item-food {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+/* Customer Name */
+.order-item-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1e2a38;
+}
+
+/* Address */
+.order-item-address {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.order-item-address p {
+  margin: 0;
+}
+
+/* Phone */
+.order-item-phone {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Order Info Row */
+.order-item p {
+  margin: 5px 0;
+}
+
+/* Select Dropdown */
+.order-item select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.order-item select:hover {
+  border-color: #1e2a38;
+}
+
+/* Items & Amount */
+.order-item p:last-of-type {
+  font-weight: 600;
+  color: #1e2a38;
+}
+
+/* Responsive for smaller devices */
+@media (max-width: 768px) {
+  .order.add {
+    padding: 30px 5%;
+  }
+
+  .order-item {
+    padding: 15px 20px;
+  }
+
+  .order-item img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .order-item-food {
+    font-size: 13px;
+  }
+
+  .order-item-name {
+    font-size: 15px;
+  }
+}
