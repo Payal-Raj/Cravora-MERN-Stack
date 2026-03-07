@@ -30,8 +30,22 @@ const Orders = ({url}) => {
   }
 
   useEffect(() => {
-    fetchAllOrders();
-  },[])
+  const getOrders = async () => {
+    try {
+      const response = await axios.get(url + "/api/order/list");
+      if (response.data.success) {
+        setOrders(response.data.data); 
+      } else {
+        toast.error("Error fetching orders");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Error fetching orders");
+    }
+  };
+
+  getOrders(); 
+}, [url]); 
 
   return (
     <div className ='order add'>
