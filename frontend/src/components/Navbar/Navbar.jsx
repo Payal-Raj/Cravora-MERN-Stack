@@ -141,7 +141,7 @@ const Navbar = ({ setShowLogin }) => {
                     <li
                       className="dropdown-item"
                       onClick={() => {
-                        navigate("/orders"); 
+                        navigate("/myorders"); 
                         setShowProfileMenu(false);
                         setOpen(false);
                       }}
@@ -192,7 +192,9 @@ const Navbar = ({ setShowLogin }) => {
             <div className="navbar-profile">
               <img src={assets.profile_icon} alt="" />
               <ul className="nav-profile-dropdown">
-                <li className="dropdown-item">
+                <li className="dropdown-item" onClick={() => {
+                        navigate("/myorders"); 
+                      }}>
                   <FaBoxOpen className="dropdown-icon" />
                   <p>Orders</p>
                 </li>
