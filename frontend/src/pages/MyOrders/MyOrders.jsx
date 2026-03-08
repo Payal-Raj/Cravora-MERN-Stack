@@ -47,7 +47,7 @@ const MyOrders = () => {
               <p className={`status ${order.status.toLowerCase()}`}>
                 <span>&#x25cf;</span> <b>{order.status}</b>
               </p>
-              <Button text="Track Order" />
+              <Button onClick={fetchOrders} text="Track Order" />
             </div>
           );
         })}

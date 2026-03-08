@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
-import Button from "../button/button";
+import Button from "../Button/Button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { StoreContext } from "../../Context/StoreContext";
 import { FaBoxOpen, FaSignOutAlt } from "react-icons/fa";
+import Search from "../Search/Search";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("Home");
   const [open, setOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, food_list } =
+    useContext(StoreContext);
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
@@ -111,6 +114,17 @@ const Navbar = ({ setShowLogin }) => {
         {/* Mobile icons below menu links */}
         {isMobile && open && (
           <div className="mobile-dropdown-bottom">
+            {/* Search icon for mobile */}
+            <div className="search-bar">
+              <span
+                className="material-symbols-outlined"
+                onClick={() => setShowSearch(!showSearch)}
+                style={{ cursor: "pointer" }}
+              >
+                search
+              </span>
+              {showSearch && <Search foodList={food_list} />}
+            </div>
             <Link
               to="/cart"
               className="mobile-cart-link"
@@ -141,7 +155,7 @@ const Navbar = ({ setShowLogin }) => {
                     <li
                       className="dropdown-item"
                       onClick={() => {
-                        navigate("/myorders"); 
+                        navigate("/myorders");
                         setShowProfileMenu(false);
                         setOpen(false);
                       }}
@@ -175,7 +189,15 @@ const Navbar = ({ setShowLogin }) => {
       {/* Desktop icons */}
       {!isMobile && (
         <div className="navbar-right">
-          <span className="material-symbols-outlined">search</span>
+          {showSearch && <Search foodList={food_list} />}
+          <span
+            className="material-symbols-outlined"
+            onClick={() => setShowSearch(!showSearch)}
+            style={{ cursor: "pointer" }}
+          >
+            search
+          </span>
+
           <Link to="/cart" className="navbar-cart-link">
             <span className="material-symbols-outlined">shopping_cart</span>
             <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
@@ -192,9 +214,12 @@ const Navbar = ({ setShowLogin }) => {
             <div className="navbar-profile">
               <img src={assets.profile_icon} alt="" />
               <ul className="nav-profile-dropdown">
-                <li className="dropdown-item" onClick={() => {
-                        navigate("/myorders"); 
-                      }}>
+                <li
+                  className="dropdown-item"
+                  onClick={() => {
+                    navigate("/myorders");
+                  }}
+                >
                   <FaBoxOpen className="dropdown-icon" />
                   <p>Orders</p>
                 </li>
