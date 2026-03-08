@@ -80,12 +80,12 @@ const PlaceOrder = () => {
   const total = subtotal + deliveryFee;
 
   useEffect(() => {
-    if (!token) {
-      navigate("/cart");
-    } else if (getTotalCartAmount() === 0) {
-      navigate("/cart");
-    }
-  }, [token]);
+  if (!token) {
+    navigate("/cart");
+  } else if (getTotalCartAmount() === 0) {
+    navigate("/cart");
+  }
+}, [token, navigate, getTotalCartAmount]);
 
   return (
     <form onSubmit={placeOrder} className="place-order">

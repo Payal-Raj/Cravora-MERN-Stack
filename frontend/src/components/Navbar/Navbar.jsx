@@ -13,13 +13,14 @@ const Navbar = ({ setShowLogin }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const location = useLocation();
   const { getTotalCartAmount, token, setToken, food_list } =
     useContext(StoreContext);
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setToken("");
     navigate("/");
   };
@@ -148,6 +149,7 @@ const Navbar = ({ setShowLogin }) => {
                   alt=""
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
                 />
+                <p>{user?.name}</p>
 
                 {(showProfileMenu || !isMobile) && (
                   <ul className="nav-profile-dropdown">
@@ -213,6 +215,7 @@ const Navbar = ({ setShowLogin }) => {
           ) : (
             <div className="navbar-profile">
               <img src={assets.profile_icon} alt="" />
+              <p>{user?.name}</p>
               <ul className="nav-profile-dropdown">
                 <li
                   className="dropdown-item"
