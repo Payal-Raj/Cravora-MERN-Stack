@@ -20,7 +20,12 @@ const loginUser = async(req, res) => {
 
         const token = createToken(user._id);
 
-        res.json({success:true, token});
+        res.json({success:true, 
+            token, 
+            user: {
+                name: user.name,
+                email: user.email
+            }});
     } catch (error) {
         console.log(error);
         res.json({success:false, message: "Error"});
@@ -67,7 +72,13 @@ const registerUser = async (req, res) =>  {
 
         const token = createToken(user._id);
 
-        res.json({success:true, token})
+        res.json({success:true, 
+            token,
+             user: {
+                name: newUser.name,
+                email: newUser.email
+            }
+        })
     } catch (error) {
         console.log(error);
         res.json({success:false, message:"Error"});
