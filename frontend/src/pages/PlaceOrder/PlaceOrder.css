@@ -114,3 +114,67 @@
     font-size: 18px;
   }
 }
+
+/* ========================= */
+/* PAYMENT METHOD UI */
+/* ========================= */
+
+.payment-method {
+  margin-top: 25px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.payment-method h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.payment-card:hover {
+  border-color: #ff4d4d;
+}
+
+.payment-card.active {
+  border-color: #ff4d4d;
+  background: #fff5f5;
+}
+
+.payment-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-icon {
+  font-size: 20px;
+}
+
+.payment-title {
+  font-weight: 600;
+  color: #222;
+}
+
+.payment-desc {
+  font-size: 12px;
+  color: #777;
+}
+
+.check {
+  color: #ff4d4d;
+  font-size: 18px;
+}
